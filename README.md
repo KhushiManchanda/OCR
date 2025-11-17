@@ -1,6 +1,6 @@
 <div align="center">
 
-# Sehat Guftagu (صحت گفتگو)
+
 
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue?style=for-the-badge&logo=python)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.42.0-FF4B4B?style=for-the-badge&logo=streamlit)](https://streamlit.io/)
@@ -120,3 +120,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 <div align="center">
 Made with ❤️ for better healthcare understanding
 </div>
+
