@@ -6,9 +6,6 @@
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.42.0-FF4B4B?style=for-the-badge&logo=streamlit)](https://streamlit.io/)
 [![Supabase](https://img.shields.io/badge/Supabase-Database-96F?style=for-the-badge&logo=supabase)](https://supabase.io/)
 [![Groq](https://img.shields.io/badge/Groq-AI-00A4DC?style=for-the-badge)](https://groq.com/)
-
-میڈیکل رپورٹ کا تجزیہ کر کے رہنمائی کرنے والا ڈاکٹر
-
 </div>
 
 ## 🌟 Introduction
@@ -120,4 +117,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 <div align="center">
 Made with ❤️ for better healthcare understanding
 </div>
+
 
