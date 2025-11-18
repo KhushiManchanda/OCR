@@ -1,51 +1,42 @@
-import requests
+
 import streamlit as st
 from googletrans import Translator
+from gtts import gTTS
 import io
+# pydub is installed but not explicitly used in this simplified Streamlit approach
 
 class TTSService:
     def __init__(self):
         self.translator = Translator()
-        self.tts_url = "https://api.upliftai.org/v1/synthesis/text-to-speech"
-        # Get API key from Streamlit secrets
-        self.headers = {
-            "Authorization": f"Bearer {st.secrets['UPLIFTAI_API_KEY']}",
-            "Content-Type": "application/json"
-        }
-    
-    def translate_to_urdu(self, text):
-        """Translate English text to Urdu"""
+        # No API keys or external services needed for gTTS
+        
+    def translate_to_hindi(self, text):
+        """Translate English text to Hindi"""
         try:
-            translation = self.translator.translate(text, dest='ur')
+            translation = self.translator.translate(text, dest='hi') 
             return translation.text
         except Exception as e:
-            st.error(f"Translation error: {str(e)}")
+            # st.error(f"Translation error: {str(e)}") # Keep the app clean
             return None
 
-    def generate_speech(self, urdu_text):
-        """Generate speech from Urdu text using UpliftAI API"""
-        if not urdu_text:
+    def generate_speech(self, hindi_text):
+        """Generate speech from Hindi text using the free, local gTTS library"""
+        if not hindi_text:
             st.error("No text provided for speech generation")
             return None
 
         try:
-            payload = {
-                "voiceId": "v_8eelc901",
-                "text": urdu_text,
-                "outputFormat": "MP3_22050_128"
-            }
+            # 1. gTTS se Hindi audio generate karo
+            # 'hi' is the language code for Hindi
+            tts = gTTS(text=hindi_text, lang='hi')
             
-            response = requests.post(self.tts_url, json=payload, headers=self.headers)
-            response.raise_for_status()  # Raise exception for non-200 status codes
+            # 2. Audio ko memory (BytesIO) mein save karo
+            mp3_fp = io.BytesIO()
+            tts.write_to_fp(mp3_fp)
+            mp3_fp.seek(0)
             
-            # Convert response content to BytesIO for Streamlit audio playback
-            audio_data = io.BytesIO(response.content)
-            audio_data.seek(0)  # Reset buffer position to start
-            return audio_data
+            return mp3_fp
 
-        except requests.exceptions.RequestException as e:
-            st.error(f"API request failed: {str(e)}")
-            return None
         except Exception as e:
-            st.error(f"Speech generation error: {str(e)}")
+            st.error(f"Local TTS (gTTS) generation failed: {str(e)}")
             return None
